@@ -1,0 +1,13 @@
+{
+  "name": "wedding-planning-dashboard",
+  "version": "1.0.0",
+  "description": "Wedding planning task tracker for Val & Dan",
+  "scripts": {
+    "deploy": "./deploy.sh",
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["wedding", "planning", "dashboard"],
+  "author": "Dan",
+  "license": "MIT"
+}

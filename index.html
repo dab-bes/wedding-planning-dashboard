@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Val & Dan's Wedding Planning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background 0.4s ease;
+        }
+        
+        /* Val's dark blue background */
+        body.val-theme {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 50%, #34495e 100%);
+        }
+        
+        /* Dan's dark green background */
+        body.dan-theme {
+            background: linear-gradient(135deg, #1a2e1a 0%, #2d4a2d 50%, #3d5a3d 100%);
+        }
+        
+        /* Both's dark orange background */
+        body.both-theme {
+            background: linear-gradient(135deg, #2e1a0f 0%, #4a2d1a 50%, #5a3d27 100%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+        }
+        
+        /* Val's container styling */
+        body.val-theme .container {
+            background: rgba(44, 62, 80, 0.95);
+            border: 2px solid #5d7a9e;
+            color: #ecf0f1;
+        }
+        
+        /* Dan's container styling */
+        body.dan-theme .container {
+            background: rgba(45, 74, 45, 0.95);
+            border: 2px solid #6b9b6b;
+            color: #ecf0f1;
+        }
+        
+        /* Both's container styling */
+        body.both-theme .container {
+            background: rgba(74, 45, 26, 0.95);
+            border: 2px solid #a67c52;
+            color: #ecf0f1;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #333;
+            transition: color 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 700;
+        }
+        
+        body.val-theme h1,
+        body.dan-theme h1,
+        body.both-theme h1 {
+            color: #ecf0f1;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: color 0.4s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            font-weight: 500;
+        }
+        
+        body.val-theme .subtitle {
+            color: #bdc3c7;
+        }
+        
+        body.dan-theme .subtitle {
+            color: #bdc3c7;
+        }
+        
+        body.both-theme .subtitle {
+            color: #bdc3c7;
+        }
+        
+        .view-toggle {
+            display: flex;
+            overflow-x: auto;
+            gap: 0;
+            margin-bottom: 25px;
+            padding: 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            scroll-snap-type: x mandatory;
+            transition: all 0.3s ease;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+        }
+        
+        .view-toggle.touching {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.4);
+            box-shadow: 0 12px 40px rgba(255,255,255,0.6);
+            backdrop-filter: blur(25px);
+            z-index: 1000;
+            position: relative;
+        }
+        
+        /* Dark overlay for the entire viewport */
+        .view-toggle.touching + * {
+            filter: brightness(0.3);
+            transition: filter 0.3s ease;
+        }
+        
+        .dark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .view-toggle.touching ~ .dark-overlay {
+            opacity: 1;
+        }
+        
+        .view-toggle.touching::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.8) 0%, 
+                rgba(255,255,255,0.4) 25%, 
+                rgba(255,255,255,0.8) 50%, 
+                rgba(255,255,255,0.4) 75%, 
+                rgba(255,255,255,0.8) 100%);
+            border-radius: 27px;
+            z-index: -1;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+        
+        .view-toggle::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body.val-theme .view-toggle,
+        body.dan-theme .view-toggle,
+        body.both-theme .view-toggle {
+            border-bottom-color: rgba(236, 240, 241, 0.2);
+        }
+        
+        .toggle-btn {
+            flex: 0 0 auto;
+            padding: 20px 40px;
+            font-size: 22px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: white;
+            white-space: nowrap;
+            text-align: center;
+            scroll-snap-align: center;
+            margin: 0 10px;
+            min-width: 150px;
+            width: auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .toggle-btn:first-child {
+            margin-left: 0;
+        }
+        
+        .toggle-btn:last-child {
+            margin-right: 0;
+        }
+        
+        .toggle-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
+        
+        .toggle-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Val's dark blue theme */
+        .toggle-btn[data-view="val"].active {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            box-shadow: 0 2px 8px rgba(52, 73, 94, 0.4);
+        }
+        
+        /* Dan's dark green theme */
+        .toggle-btn[data-view="dan"].active {
+            background: linear-gradient(135deg, #3d5a3d 0%, #2d4a2d 100%);
+            box-shadow: 0 2px 8px rgba(61, 90, 61, 0.4);
+        }
+        
+        /* Both's dark orange theme */
+        .toggle-btn[data-view="both"].active {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.4);
+        }
+        
+        .dashboard {
+            display: none;
+        }
+        
+        .dashboard.active {
+            display: block;
+        }
+        
+        .month-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Val's dark blue month sections */
+        body.val-theme .month-section {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.6) 0%, rgba(44, 62, 80, 0.4) 100%);
+            border-left: 4px solid #5d7a9e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Dan's dark green month sections */
+        body.dan-theme .month-section {
+            background: linear-gradient(135deg, rgba(61, 90, 61, 0.6) 0%, rgba(45, 74, 45, 0.4) 100%);
+            border-left: 4px solid #6b9b6b;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Both's dark orange month sections */
+        body.both-theme .month-section {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.6) 0%, rgba(160, 82, 45, 0.4) 100%);
+            border-left: 4px solid #a67c52;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Default neutral month sections */
+        body:not(.val-theme):not(.dan-theme):not(.both-theme) .month-section {
+            background: #FAFAFA;
+            border-left: 4px solid #007AFF;
+        }
+        
+        /* Seasonal month backgrounds - override theme styles */
+        .month-section[data-month="october"] {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.15) 0%, rgba(255, 140, 0, 0.08) 100%) !important;
+            border-left: 4px solid #FF8C00 !important;
+        }
+        
+        .month-section[data-month="november"] {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(178, 34, 34, 0.08) 100%) !important;
+            border-left: 4px solid #DC143C !important;
+        }
+        
+        .month-section[data-month="december"] {
+            background: linear-gradient(135deg, rgba(0, 100, 0, 0.15) 0%, rgba(34, 139, 34, 0.08) 100%) !important;
+            border-left: 4px solid #228B22 !important;
+        }
+        
+        .month-section[data-month="january"] {
+            background: linear-gradient(135deg, rgba(176, 196, 222, 0.15) 0%, rgba(135, 206, 235, 0.08) 100%) !important;
+            border-left: 4px solid #87CEEB !important;
+        }
+        
+        .month-section[data-month="february"] {
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.15) 0%, rgba(255, 105, 180, 0.08) 100%) !important;
+            border-left: 4px solid #FF69B4 !important;
+        }
+        
+        .month-section[data-month="march"] {
+            background: linear-gradient(135deg, rgba(144, 238, 144, 0.15) 0%, rgba(50, 205, 50, 0.08) 100%) !important;
+            border-left: 4px solid #32CD32 !important;
+        }
+        
+        .month-section[data-month="april"] {
+            background: linear-gradient(135deg, rgba(255, 255, 0, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%) !important;
+            border-left: 4px solid #FFD700 !important;
+        }
+        
+        .month-section[data-month="may"] {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15) 0%, rgba(255, 20, 147, 0.08) 100%) !important;
+            border-left: 4px solid #FF1493 !important;
+        }
+        
+        .month-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            transition: color 0.4s ease;
+            letter-spacing: 0.3px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            text-transform: uppercase;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Val's dark blue month titles */
+        body.val-theme .month-title {
+            color: #a8c0d8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Dan's dark green month titles */
+        body.dan-theme .month-title {
+            color: #a8d8a8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Both's dark orange month titles */
+        body.both-theme .month-title {
+            color: #d8b8a8;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-radius: 6px;
+            margin-bottom: 5px;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 50px;
+        }
+        
+        body.val-theme .task-item,
+        body.dan-theme .task-item,
+        body.both-theme .task-item {
+            background: rgba(236, 240, 241, 0.1);
+            border-bottom: 1px solid rgba(236, 240, 241, 0.1);
+        }
+        
+        .task-item:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateX(3px);
+        }
+        
+        body.val-theme .task-item:hover {
+            background: rgba(93, 122, 158, 0.3);
+        }
+        
+        body.dan-theme .task-item:hover {
+            background: rgba(107, 155, 107, 0.3);
+        }
+        
+        body.both-theme .task-item:hover {
+            background: rgba(166, 124, 82, 0.3);
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 2px;
+            position: relative;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        body.val-theme .checkbox,
+        body.dan-theme .checkbox,
+        body.both-theme .checkbox {
+            border-color: rgba(236, 240, 241, 0.4);
+        }
+        
+        .checkbox:hover {
+            transform: scale(1.1);
+        }
+        
+        .checkbox.checked {
+            background: #007AFF;
+            border-color: #007AFF;
+        }
+        
+        /* Val's view - dark blue checkboxes */
+        #val-view .checkbox.checked {
+            background: linear-gradient(135deg, #5d7a9e 0%, #34495e 100%);
+            border-color: #5d7a9e;
+            box-shadow: 0 2px 6px rgba(52, 73, 94, 0.4);
+        }
+        
+        /* Dan's view - dark green checkboxes */
+        #dan-view .checkbox.checked {
+            background: linear-gradient(135deg, #6b9b6b 0%, #3d5a3d 100%);
+            border-color: #6b9b6b;
+            box-shadow: 0 2px 6px rgba(61, 90, 61, 0.4);
+        }
+        
+        /* Both's view - dark orange checkboxes */
+        #both-view .checkbox.checked {
+            background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
+            border-color: #a67c52;
+            box-shadow: 0 2px 6px rgba(139, 69, 19, 0.4);
+        }
+        
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .task-text {
+            flex: 1;
+            color: #333;
+            font-size: 15px;
+            transition: color 0.4s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            font-weight: 500;
+        }
+        
+        body.val-theme .task-text,
+        body.dan-theme .task-text,
+        body.both-theme .task-text {
+            color: #ecf0f1;
+        }
+        
+        .task-item.completed .task-text {
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        body.val-theme .task-item.completed .task-text {
+            color: #7f8c8d;
+        }
+        
+        body.dan-theme .task-item.completed .task-text {
+            color: #7f8c8d;
+        }
+        
+        body.both-theme .task-item.completed .task-text {
+            color: #7f8c8d;
+        }
+        
+        .task-note {
+            color: #888;
+            font-size: 13px;
+            margin-top: 2px;
+            transition: color 0.4s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            font-weight: 400;
+        }
+        
+        body.val-theme .task-note,
+        body.dan-theme .task-note,
+        body.both-theme .task-note {
+            color: #95a5a6;
+        }
+        
+        /* BOTH task indicator */
+        .both-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #FFB347 0%, #FF8C00 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+            box-shadow: 0 1px 3px rgba(255, 140, 0, 0.3);
+        }
+        
+        .both-indicator::before {
+            content: '★';
+            font-size: 10px;
+        }
+        
+        /* Mobile optimizations for better touch targets */
+        @media (max-width: 768px) {
+            .task-item {
+                padding: 20px;
+                min-height: 60px;
+                margin-bottom: 8px;
+            }
+            
+            .checkbox {
+                width: 28px;
+                height: 28px;
+                min-width: 28px;
+            }
+            
+            .checkbox.checked::after {
+                font-size: 16px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .view-toggle {
+                padding: 0;
+                margin-bottom: 20px;
+            }
+            
+            .toggle-btn {
+                padding: 18px 25px;
+                font-size: 20px;
+                flex: 0 0 100%;
+                font-weight: 700;
+            }
+        }
+    </style>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMPpD_EXkRVA_X5ywCnNIKEWKRBsL8zLk",
+            authDomain: "wedding-planning-sync.firebaseapp.com",
+            projectId: "wedding-planning-sync",
+            storageBucket: "wedding-planning-sync.firebasestorage.app",
+            messagingSenderId: "981513971859",
+            appId: "1:981513971859:web:bce4ed402740e9fe4f0566",
+            measurementId: "G-L4G1F54868"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // Make Firebase available globally
+        window.firebaseApp = app;
+        window.firestore = db;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>💍 Wedding Planning</h1>
+        <div class="subtitle">Sterling Ridge Resort | June 19-21, 2026</div>
+        
+        <div class="view-toggle">
+            <button class="toggle-btn active" data-view="val">Val</button>
+            <button class="toggle-btn" data-view="dan">Dan</button>
+            <button class="toggle-btn" data-view="both">Both</button>
+        </div>
+        <div class="dark-overlay"></div>
+        
+        <div id="val-view" class="dashboard active"></div>
+        <div id="dan-view" class="dashboard"></div>
+        <div id="both-view" class="dashboard"></div>
+    </div>
+
+    <script>
+        const tasks = {
+            october: {
+                title: "October 2025",
+                tasks: [
+                    { owner: "dan", text: "Research & book photographer", note: "Top priority - best ones book 12+ months out" },
+                    { owner: "val", text: "Research & book videographer", note: "If you want video, book now" },
+                    { owner: "val", text: "Confirm cousin as DJ & discuss equipment needs", note: "What do they have vs. need to rent?" },
+                    { owner: "val", text: "Research & book Friday jazz trio/duo", note: "Local musicians book up for summer" },
+                    { owner: "both", text: "Research & book day-of coordinator", note: "Interview together - this person is crucial!" },
+                    { owner: "both", text: "Finalize guest count estimate", note: "Affects all vendor decisions and rentals" },
+                    { owner: "dan", text: "Reserve cabin blocks at Sterling Ridge", note: "Get blocks for both Friday & Saturday nights" },
+                    { owner: "dan", text: "Research overflow hotel blocks nearby", note: "For guests who can't get cabins" }
+                ]
+            },
+            november: {
+                title: "November 2025",
+                tasks: [
+                    { owner: "dan", text: "Research & book florist", note: "Discuss natural/wild Vermont aesthetic" },
+                    { owner: "val", text: "Research & book cake baker", note: "Schedule tasting" },
+                    { owner: "both", text: "Finalize food menu with caterer/venue", note: "Schedule tasting if available" },
+                    { owner: "val", text: "Develop & test pre-batch cocktail recipes", note: "Finalize 3-4 recipes that scale well" },
+                    { owner: "both", text: "Confirm tent size & reserve", note: "Based on final guest count" },
+                    { owner: "both", text: "Reserve tables, chairs, linens, dinnerware", note: "From rental company" },
+                    { owner: "dan", text: "Research experiential lighting designers", note: "For tent, trees, forest paths" },
+                    { owner: "both", text: "Start suit shopping - try on styles", note: "Decide buy vs. rent together" }
+                ]
+            },
+            december: {
+                title: "December 2025",
+                tasks: [
+                    { owner: "val", text: "Design & order invitations", note: "Reflect bohemian/nature vibe" },
+                    { owner: "dan", text: "Book lighting designer/rentals", note: "Festival lights, uplighting, path lighting, tent lighting" },
+                    { owner: "dan", text: "Start sourcing bohemian rugs", note: "Vintage shops, rentals, borrow from friends (need 8-12)" },
+                    { owner: "val", text: "Calculate alcohol quantities & budget", note: "Cocktails, beer, wine, mixers, garnishes" },
+                    { owner: "val", text: "Reserve bar equipment rentals", note: "Dispensers, coolers, ice tubs, glassware" },
+                    { owner: "both", text: "Begin ceremony script with Gina", note: "Schedule call/meeting to brainstorm" },
+                    { owner: "both", text: "Book hair & makeup artists", note: "Schedule trials for spring" }
+                ]
+            },
+            january: {
+                title: "January 2026",
+                tasks: [
+                    { owner: "both", text: "Order/finalize suits", note: "Allow 3-4 months for alterations" },
+                    { owner: "dan", text: "Meet with florist - finalize designs", note: "Bouquets, boutonnieres, altar, centerpieces" },
+                    { owner: "val", text: "Finalize cake design", note: "Confirm flavors, size, delivery" },
+                    { owner: "dan", text: "Order transparent umbrellas in bulk", note: "Amazon/Oriental Trading - one per guest" },
+                    { owner: "dan", text: "Order/source shawls or blankets", note: "Bulk pashminas or have guests bring own" },
+                    { owner: "dan", text: "Source hay bales & sheets", note: "Check with venue or local farm" },
+                    { owner: "val", text: "Create ceremony processional playlist", note: "Select & order songs" },
+                    { owner: "val", text: "Start building backup reception playlist", note: "For after DJ set ends" }
+                ]
+            },
+            february: {
+                title: "February 2026",
+                tasks: [
+                    { owner: "val", text: "Mail invitations (8 weeks before wedding)", note: "Mid-late February for June wedding" },
+                    { owner: "both", text: "Book transportation/shuttles for guests", note: "Especially important if guests are drinking" },
+                    { owner: "val", text: "Finalize rehearsal dinner plans", note: "Location, guest list, menu for Friday night" },
+                    { owner: "dan", text: "Plan day-after brunch", note: "Sunday June 21 - venue or restaurant?" },
+                    { owner: "dan", text: "Design & order signage", note: "Welcome, directional, bar menu, table numbers" },
+                    { owner: "dan", text: "Choose guest book or alternative", note: "Order if needed" },
+                    { owner: "dan", text: "Get/make card box", note: "For gifts and cards" },
+                    { owner: "both", text: "Schedule suit alterations appointments", note: "Usually 2-3 fittings needed" }
+                ]
+            },
+            march: {
+                title: "March 2026",
+                tasks: [
+                    { owner: "both", text: "Track RSVPs as they come in", note: "Update guest count regularly" },
+                    { owner: "val", text: "Finalize DJ equipment list & rentals", note: "Coordinate with cousin" },
+                    { owner: "val", text: "Design cocktail signage/menu", note: "Beautiful descriptions of each batched cocktail" },
+                    { owner: "dan", text: "Finalize all bohemian rug sourcing", note: "Ensure you have 8-12 secured" },
+                    { owner: "dan", text: "Finalize lighting plan with designer", note: "Exact placement of all lights, power needs" },
+                    { owner: "dan", text: "Source nature-inspired decor elements", note: "Driftwood, stones, branches, etc." },
+                    { owner: "dan", text: "Decide on favors (if doing them)", note: "Local honey, wildflower seeds, s'mores kits?" },
+                    { owner: "both", text: "Schedule hair & makeup trials", note: "Try looks and finalize" },
+                    { owner: "both", text: "Finalize ceremony script with Gina", note: "Review and approve final version" }
+                ]
+            },
+            april: {
+                title: "April 2026",
+                tasks: [
+                    { owner: "both", text: "Finalize guest count with all RSVPs", note: "Confirm with all vendors" },
+                    { owner: "dan", text: "Create seating chart", note: "Assign tables based on final count" },
+                    { owner: "dan", text: "Order/make place cards & escort cards", note: "Based on seating chart" },
+                    { owner: "val", text: "Confirm all music details with vendors", note: "Jazz trio, DJ cousin, equipment rentals" },
+                    { owner: "val", text: "Order all beer from brewery", note: "Confirm delivery date and storage plan" },
+                    { owner: "val", text: "Purchase all cocktail ingredients", note: "Non-perishables now, fresh items closer to date" },
+                    { owner: "dan", text: "Confirm all rental deliveries", note: "Tent, tables, chairs, linens, lighting, bar equipment" },
+                    { owner: "dan", text: "Order thank you cards", note: "Have ready to write after wedding" },
+                    { owner: "both", text: "Create detailed day-of timeline", note: "Hour by hour schedule for all vendors & wedding party" },
+                    { owner: "both", text: "Final suit fittings & pick up", note: "Try on with shoes and accessories" },
+                    { owner: "both", text: "Confirm honeymoon plans", note: "Book flights, hotels, activities" }
+                ]
+            },
+            may: {
+                title: "May 2026",
+                tasks: [
+                    { owner: "both", text: "Send timeline to ALL vendors", note: "Make sure everyone has it 2-3 weeks before" },
+                    { owner: "both", text: "Confirm all vendor details one final time", note: "Call each vendor to review timeline & logistics" },
+                    { owner: "val", text: "Pre-batch cocktails (week before)", note: "Store properly, transport day-of" },
+                    { owner: "val", text: "Prep all garnishes (day before)", note: "Cut fruit, prep herbs, store properly" },
+                    { owner: "dan", text: "Pack all decor items", note: "Umbrellas, signage, card box, guest book, etc." },
+                    { owner: "dan", text: "Coordinate rug transport to venue", note: "Arrange pickup/delivery of all rugs" },
+                    { owner: "dan", text: "Print final seating chart display", note: "For display at entrance" },
+                    { owner: "both", text: "Prepare vendor payments & tips", note: "Cash/checks in labeled envelopes" },
+                    { owner: "both", text: "Pack emergency kit", note: "Safety pins, stain remover, pain reliever, band-aids, etc." },
+                    { owner: "both", text: "Rehearsal (evening before ceremony)", note: "Walk through ceremony with Gina" },
+                    { owner: "both", text: "Get married! 🎉", note: "June 19-21, 2026 - You did it!" }
+                ]
+            }
+        };
+
+        let completedTasks = {};
+        let isFirebaseReady = false;
+        
+        try {
+            const saved = localStorage.getItem('weddingTasks');
+            completedTasks = saved ? JSON.parse(saved) : {};
+        } catch (e) {
+            completedTasks = {};
+        }
+        
+        // Wait for Firebase to be ready
+        function waitForFirebase() {
+            return new Promise((resolve) => {
+                const checkFirebase = () => {
+                    if (window.firestore) {
+                        isFirebaseReady = true;
+                        resolve();
+                    } else {
+                        setTimeout(checkFirebase, 100);
+                    }
+                };
+                checkFirebase();
+            });
+        }
+        
+        // Initialize Firebase sync
+        async function initFirebaseSync() {
+            await waitForFirebase();
+            
+            const docRef = doc(window.firestore, 'wedding-tasks', 'val-and-dan');
+            
+            // Listen for real-time updates
+            onSnapshot(docRef, (doc) => {
+                if (doc.exists()) {
+                    const data = doc.data();
+                    if (data.completedTasks) {
+                        completedTasks = data.completedTasks;
+                        localStorage.setItem('weddingTasks', JSON.stringify(completedTasks));
+                        updateAllTaskDisplays();
+                    }
+                }
+            });
+        }
+        
+        // Sync task completion to Firebase
+        async function syncTaskToFirebase(taskId, isCompleted) {
+            if (!isFirebaseReady) return;
+            
+            try {
+                const docRef = doc(window.firestore, 'wedding-tasks', 'val-and-dan');
+                await setDoc(docRef, {
+                    completedTasks: completedTasks,
+                    lastUpdated: new Date().toISOString(),
+                    updatedBy: 'user' // You could make this dynamic
+                }, { merge: true });
+            } catch (error) {
+                console.log('Firebase sync error:', error);
+            }
+        }
+        
+        // Update all task displays
+        function updateAllTaskDisplays() {
+            document.querySelectorAll('[data-task-id]').forEach(element => {
+                const taskId = element.getAttribute('data-task-id');
+                const isCompleted = completedTasks[taskId] || false;
+                
+                if (element.classList.contains('task-item')) {
+                    element.classList.toggle('completed', isCompleted);
+                } else if (element.classList.contains('checkbox')) {
+                    element.classList.toggle('checked', isCompleted);
+                }
+            });
+            
+            // Update progress for all views
+            updateProgress('val');
+            updateProgress('dan');
+            updateProgress('both');
+        }
+
+        function updateTheme(view) {
+            document.body.className = '';
+            if (view === 'val') {
+                document.body.classList.add('val-theme');
+            } else if (view === 'dan') {
+                document.body.classList.add('dan-theme');
+            } else if (view === 'both') {
+                document.body.classList.add('both-theme');
+            }
+        }
+
+        function renderView(view) {
+            const container = document.getElementById(`${view}-view`);
+            container.innerHTML = '';
+            
+            Object.keys(tasks).forEach(monthKey => {
+                const month = tasks[monthKey];
+                
+                // Filter tasks for this view
+                const filteredTasks = month.tasks.filter(task => 
+                    view === 'both' ? task.owner === 'both' : task.owner === view || task.owner === 'both'
+                );
+                
+                if (filteredTasks.length === 0) return;
+                
+                const monthSection = document.createElement('div');
+                monthSection.className = 'month-section';
+                monthSection.setAttribute('data-month', monthKey);
+                
+                let html = `<div class="month-title">${month.title}</div>`;
+                
+                filteredTasks.forEach(task => {
+                    const originalIndex = month.tasks.indexOf(task);
+                    const taskId = `${monthKey}-${originalIndex}`;
+                    const isCompleted = completedTasks[taskId] || false;
+                    
+                    html += `
+                        <div class="task-item ${isCompleted ? 'completed' : ''}" data-task-id="${taskId}">
+                            <div class="checkbox ${isCompleted ? 'checked' : ''}" data-task-id="${taskId}"></div>
+                            <div>
+                                <div class="task-text">
+                                    ${task.text}
+                                    ${task.owner === 'both' ? '<span class="both-indicator">BOTH</span>' : ''}
+                                </div>
+                                <div class="task-note">${task.note}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                monthSection.innerHTML = html;
+                container.appendChild(monthSection);
+            });
+        }
+
+        function toggleTask(taskId) {
+            completedTasks[taskId] = !completedTasks[taskId];
+            localStorage.setItem('weddingTasks', JSON.stringify(completedTasks));
+            
+            document.querySelectorAll(`[data-task-id="${taskId}"]`).forEach(el => {
+                if (el.classList.contains('task-item')) {
+                    el.classList.toggle('completed', completedTasks[taskId]);
+                } else if (el.classList.contains('checkbox')) {
+                    el.classList.toggle('checked', completedTasks[taskId]);
+                }
+            });
+            
+            // Sync to Firebase
+            syncTaskToFirebase(taskId, completedTasks[taskId]);
+        }
+
+        document.addEventListener('click', function(e) {
+            // Handle checkbox clicks
+            if (e.target.classList.contains('checkbox')) {
+                toggleTask(e.target.getAttribute('data-task-id'));
+            }
+            // Handle task item clicks (entire row clickable)
+            else if (e.target.closest('.task-item')) {
+                const taskItem = e.target.closest('.task-item');
+                const taskId = taskItem.getAttribute('data-task-id');
+                toggleTask(taskId);
+            }
+        });
+
+
+        // 3-Step Wheel Interaction Flow with Real-time Scrolling
+        const viewToggle = document.querySelector('.view-toggle');
+        const darkOverlay = document.querySelector('.dark-overlay');
+        let isInSelectionMode = false;
+        let currentView = 'val';
+        let scrollTimeout;
+
+        // Step 1: Touch/click wheel to enter selection mode
+        function enterSelectionMode() {
+            isInSelectionMode = true;
+            viewToggle.classList.add('touching');
+            darkOverlay.style.opacity = '1';
+        }
+
+        // Real-time section switching while scrolling
+        function handleScroll() {
+            if (!isInSelectionMode) return;
+            
+            const scrollLeft = viewToggle.scrollLeft;
+            const containerWidth = viewToggle.clientWidth;
+            const scrollPosition = scrollLeft + (containerWidth / 2);
+            
+            // Determine which section is in the center
+            const buttons = viewToggle.querySelectorAll('.toggle-btn');
+            let newView = currentView;
+            
+            buttons.forEach(btn => {
+                const btnLeft = btn.offsetLeft;
+                const btnWidth = btn.offsetWidth;
+                const btnCenter = btnLeft + (btnWidth / 2);
+                
+                if (Math.abs(scrollPosition - btnCenter) < btnWidth / 2) {
+                    newView = btn.getAttribute('data-view');
+                }
+            });
+            
+            // Switch section if it changed
+            if (newView !== currentView) {
+                switchToView(newView);
+            }
+        }
+
+        // Switch to a specific view
+        function switchToView(view) {
+            currentView = view;
+            
+            // Update active button
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-view="${view}"]`).classList.add('active');
+            
+            // Update dashboard
+            document.querySelectorAll('.dashboard').forEach(dash => dash.classList.remove('active'));
+            document.getElementById(`${view}-view`).classList.add('active');
+            
+            // Update theme
+            updateTheme(view);
+        }
+
+        // Step 3: Exit selection mode
+        function exitSelectionMode() {
+            isInSelectionMode = false;
+            viewToggle.classList.remove('touching');
+            darkOverlay.style.opacity = '0';
+        }
+
+        // Touch events - enter selection mode (simple tap)
+        viewToggle.addEventListener('touchstart', function(e) {
+            // Only prevent default if not already in selection mode
+            if (!isInSelectionMode) {
+                e.preventDefault();
+                enterSelectionMode();
+            }
+        });
+
+        // Mouse events - enter selection mode (simple click)
+        viewToggle.addEventListener('click', function(e) {
+            // Only enter selection mode if not already in it and not clicking a button
+            if (!isInSelectionMode && !e.target.classList.contains('toggle-btn')) {
+                e.preventDefault();
+                enterSelectionMode();
+            }
+        });
+
+        // Handle scroll events for real-time switching
+        viewToggle.addEventListener('scroll', function() {
+            if (isInSelectionMode) {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    handleScroll();
+                }, 50);
+            }
+        });
+
+        // Handle touch move for mobile scrolling
+        viewToggle.addEventListener('touchmove', function(e) {
+            if (isInSelectionMode) {
+                // Allow natural scrolling behavior
+                // Don't prevent default to allow scrolling
+            }
+        });
+
+        // Handle button clicks to finalize selection
+        viewToggle.addEventListener('click', function(e) {
+            if (e.target.classList.contains('toggle-btn')) {
+                if (isInSelectionMode) {
+                    // Finalize selection
+                    const view = e.target.getAttribute('data-view');
+                    switchToView(view);
+                    exitSelectionMode();
+                } else {
+                    // Direct selection without entering scroll mode
+                    const view = e.target.getAttribute('data-view');
+                    switchToView(view);
+                }
+            }
+        });
+
+        // Handle clicks outside to cancel selection
+        document.addEventListener('click', function(e) {
+            if (isInSelectionMode && !viewToggle.contains(e.target)) {
+                exitSelectionMode();
+            }
+        });
+
+        // Handle escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isInSelectionMode) {
+                exitSelectionMode();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            renderView('val');
+            renderView('dan');
+            renderView('both');
+            updateTheme('val'); // Start with Val's theme since that tab is default
+            
+            // Initialize Firebase sync
+            initFirebaseSync();
+        });
+    </script>
+</body>
+</html>
