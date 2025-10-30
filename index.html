@@ -11,10 +11,10 @@
             box-sizing: border-box;
         }
         
-        body {
+    body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #f5f5f5;
-            padding: 20px;
+        padding: 20px;
             line-height: 1.6;
             transition: background 0.4s ease;
         }
@@ -32,11 +32,11 @@
         /* Both's dark orange background */
         body.both-theme {
             background: linear-gradient(135deg, #2e1a0f 0%, #4a2d1a 50%, #5a3d27 100%);
-        }
-        
-        .container {
+    }
+    
+    .container {
             max-width: 800px;
-            margin: 0 auto;
+        margin: 0 auto;
             background: white;
             border-radius: 8px;
             padding: 30px;
@@ -99,10 +99,10 @@
         
         body.both-theme .subtitle {
             color: #bdc3c7;
-        }
-        
-        .view-toggle {
-            display: flex;
+    }
+    
+    .view-toggle {
+        display: flex;
             overflow-x: auto;
             gap: 0;
             margin-bottom: 25px;
@@ -185,19 +185,19 @@
         body.dan-theme .view-toggle,
         body.both-theme .view-toggle {
             border-bottom-color: rgba(236, 240, 241, 0.2);
-        }
-        
-        .toggle-btn {
+    }
+    
+    .toggle-btn {
             flex: 0 0 auto;
             padding: 20px 40px;
             font-size: 22px;
             font-weight: 700;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s;
             background: transparent;
-            color: white;
+        color: white;
             white-space: nowrap;
             text-align: center;
             scroll-snap-align: center;
@@ -215,17 +215,17 @@
         
         .toggle-btn:last-child {
             margin-right: 0;
-        }
-        
-        .toggle-btn:hover {
+    }
+    
+    .toggle-btn:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-1px);
-        }
-        
-        .toggle-btn.active {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .toggle-btn.active {
+        background: white;
+        color: #667eea;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transform: translateY(-2px);
         }
         
@@ -245,13 +245,13 @@
         .toggle-btn[data-view="both"].active {
             background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
             box-shadow: 0 2px 8px rgba(139, 69, 19, 0.4);
-        }
-        
-        .dashboard {
-            display: none;
-        }
-        
-        .dashboard.active {
+    }
+    
+    .dashboard {
+        display: none;
+    }
+    
+    .dashboard.active {
             display: block;
         }
         
@@ -333,9 +333,9 @@
         
         .month-title {
             font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 15px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
             transition: color 0.4s ease;
             letter-spacing: 0.3px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -366,10 +366,10 @@
         }
         
         .task-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 15px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 15px;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             border-radius: 6px;
             margin-bottom: 5px;
@@ -405,15 +405,15 @@
         
         .task-item:last-child {
             border-bottom: none;
-        }
-        
-        .checkbox {
-            width: 24px;
-            height: 24px;
-            min-width: 24px;
+    }
+    
+    .checkbox {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
             border: 2px solid #ccc;
             border-radius: 50%;
-            cursor: pointer;
+        cursor: pointer;
             margin-top: 2px;
             position: relative;
             transition: all 0.3s ease;
@@ -424,13 +424,13 @@
         body.dan-theme .checkbox,
         body.both-theme .checkbox {
             border-color: rgba(236, 240, 241, 0.4);
-        }
-        
-        .checkbox:hover {
-            transform: scale(1.1);
-        }
-        
-        .checkbox.checked {
+    }
+    
+    .checkbox:hover {
+        transform: scale(1.1);
+    }
+    
+    .checkbox.checked {
             background: #007AFF;
             border-color: #007AFF;
         }
@@ -454,12 +454,12 @@
             background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
             border-color: #a67c52;
             box-shadow: 0 2px 6px rgba(139, 69, 19, 0.4);
-        }
-        
-        .checkbox.checked::after {
-            content: '✓';
+    }
+    
+    .checkbox.checked::after {
+        content: '✓';
             position: absolute;
-            color: white;
+        color: white;
             font-size: 14px;
             top: 50%;
             left: 50%;
@@ -468,7 +468,7 @@
         }
         
         .task-text {
-            flex: 1;
+        flex: 1;
             color: #333;
             font-size: 15px;
             transition: color 0.4s ease;
@@ -497,11 +497,11 @@
         
         body.both-theme .task-item.completed .task-text {
             color: #7f8c8d;
-        }
-        
-        .task-note {
+    }
+    
+    .task-note {
             color: #888;
-            font-size: 13px;
+        font-size: 13px;
             margin-top: 2px;
             transition: color 0.4s ease;
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -520,11 +520,11 @@
             align-items: center;
             gap: 4px;
             background: linear-gradient(135deg, #FFB347 0%, #FF8C00 100%);
-            color: white;
+        color: white;
             padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
             margin-left: 8px;
             box-shadow: 0 1px 3px rgba(255, 140, 0, 0.3);
         }
@@ -563,16 +563,16 @@
             .view-toggle {
                 padding: 0;
                 margin-bottom: 20px;
-            }
-            
-            .toggle-btn {
+        }
+        
+        .toggle-btn {
                 padding: 18px 25px;
                 font-size: 20px;
                 flex: 0 0 100%;
                 font-weight: 700;
             }
-        }
-    </style>
+    }
+</style>
     
     <!-- Firebase SDK -->
     <script type="module">
@@ -604,7 +604,7 @@
         <h1>💍 Wedding Planning</h1>
         <div class="subtitle">Sterling Ridge Resort | June 19-21, 2026</div>
         
-        <div class="view-toggle">
+    <div class="view-toggle">
             <button class="toggle-btn active" data-view="val">Val</button>
             <button class="toggle-btn" data-view="dan">Dan</button>
             <button class="toggle-btn" data-view="both">Both</button>
@@ -614,13 +614,13 @@
         <div id="val-view" class="dashboard active"></div>
         <div id="dan-view" class="dashboard"></div>
         <div id="both-view" class="dashboard"></div>
-    </div>
+</div>
 
-    <script>
-        const tasks = {
-            october: {
+<script>
+    const tasks = {
+        october: {
                 title: "October 2025",
-                tasks: [
+            tasks: [
                     { owner: "dan", text: "Research & book photographer", note: "Top priority - best ones book 12+ months out" },
                     { owner: "val", text: "Research & book videographer", note: "If you want video, book now" },
                     { owner: "val", text: "Confirm cousin as DJ & discuss equipment needs", note: "What do they have vs. need to rent?" },
@@ -629,36 +629,36 @@
                     { owner: "both", text: "Finalize guest count estimate", note: "Affects all vendor decisions and rentals" },
                     { owner: "dan", text: "Reserve cabin blocks at Sterling Ridge", note: "Get blocks for both Friday & Saturday nights" },
                     { owner: "dan", text: "Research overflow hotel blocks nearby", note: "For guests who can't get cabins" }
-                ]
-            },
-            november: {
+            ]
+        },
+        november: {
                 title: "November 2025",
-                tasks: [
+            tasks: [
                     { owner: "dan", text: "Research & book florist", note: "Discuss natural/wild Vermont aesthetic" },
                     { owner: "val", text: "Research & book cake baker", note: "Schedule tasting" },
                     { owner: "both", text: "Finalize food menu with caterer/venue", note: "Schedule tasting if available" },
-                    { owner: "val", text: "Develop & test pre-batch cocktail recipes", note: "Finalize 3-4 recipes that scale well" },
+                    { owner: "val", text: "Design & order invitations", note: "Reflect bohemian/nature vibe" },
                     { owner: "both", text: "Confirm tent size & reserve", note: "Based on final guest count" },
                     { owner: "both", text: "Reserve tables, chairs, linens, dinnerware", note: "From rental company" },
                     { owner: "dan", text: "Research experiential lighting designers", note: "For tent, trees, forest paths" },
                     { owner: "both", text: "Start suit shopping - try on styles", note: "Decide buy vs. rent together" }
-                ]
-            },
-            december: {
+            ]
+        },
+        december: {
                 title: "December 2025",
-                tasks: [
-                    { owner: "val", text: "Design & order invitations", note: "Reflect bohemian/nature vibe" },
+            tasks: [
+                    { owner: "val", text: "Develop & test pre-batch cocktail recipes", note: "Finalize 3-4 recipes that scale well" },
                     { owner: "dan", text: "Book lighting designer/rentals", note: "Festival lights, uplighting, path lighting, tent lighting" },
                     { owner: "dan", text: "Start sourcing bohemian rugs", note: "Vintage shops, rentals, borrow from friends (need 8-12)" },
                     { owner: "val", text: "Calculate alcohol quantities & budget", note: "Cocktails, beer, wine, mixers, garnishes" },
                     { owner: "val", text: "Reserve bar equipment rentals", note: "Dispensers, coolers, ice tubs, glassware" },
                     { owner: "both", text: "Begin ceremony script with Gina", note: "Schedule call/meeting to brainstorm" },
                     { owner: "both", text: "Book hair & makeup artists", note: "Schedule trials for spring" }
-                ]
-            },
-            january: {
+            ]
+        },
+        january: {
                 title: "January 2026",
-                tasks: [
+            tasks: [
                     { owner: "both", text: "Order/finalize suits", note: "Allow 3-4 months for alterations" },
                     { owner: "dan", text: "Meet with florist - finalize designs", note: "Bouquets, boutonnieres, altar, centerpieces" },
                     { owner: "val", text: "Finalize cake design", note: "Confirm flavors, size, delivery" },
@@ -667,11 +667,11 @@
                     { owner: "dan", text: "Source hay bales & sheets", note: "Check with venue or local farm" },
                     { owner: "val", text: "Create ceremony processional playlist", note: "Select & order songs" },
                     { owner: "val", text: "Start building backup reception playlist", note: "For after DJ set ends" }
-                ]
-            },
-            february: {
+            ]
+        },
+        february: {
                 title: "February 2026",
-                tasks: [
+            tasks: [
                     { owner: "val", text: "Mail invitations (8 weeks before wedding)", note: "Mid-late February for June wedding" },
                     { owner: "both", text: "Book transportation/shuttles for guests", note: "Especially important if guests are drinking" },
                     { owner: "val", text: "Finalize rehearsal dinner plans", note: "Location, guest list, menu for Friday night" },
@@ -680,11 +680,11 @@
                     { owner: "dan", text: "Choose guest book or alternative", note: "Order if needed" },
                     { owner: "dan", text: "Get/make card box", note: "For gifts and cards" },
                     { owner: "both", text: "Schedule suit alterations appointments", note: "Usually 2-3 fittings needed" }
-                ]
-            },
-            march: {
+            ]
+        },
+        march: {
                 title: "March 2026",
-                tasks: [
+            tasks: [
                     { owner: "both", text: "Track RSVPs as they come in", note: "Update guest count regularly" },
                     { owner: "val", text: "Finalize DJ equipment list & rentals", note: "Coordinate with cousin" },
                     { owner: "val", text: "Design cocktail signage/menu", note: "Beautiful descriptions of each batched cocktail" },
@@ -694,11 +694,11 @@
                     { owner: "dan", text: "Decide on favors (if doing them)", note: "Local honey, wildflower seeds, s'mores kits?" },
                     { owner: "both", text: "Schedule hair & makeup trials", note: "Try looks and finalize" },
                     { owner: "both", text: "Finalize ceremony script with Gina", note: "Review and approve final version" }
-                ]
-            },
-            april: {
+            ]
+        },
+        april: {
                 title: "April 2026",
-                tasks: [
+            tasks: [
                     { owner: "both", text: "Finalize guest count with all RSVPs", note: "Confirm with all vendors" },
                     { owner: "dan", text: "Create seating chart", note: "Assign tables based on final count" },
                     { owner: "dan", text: "Order/make place cards & escort cards", note: "Based on seating chart" },
@@ -710,11 +710,11 @@
                     { owner: "both", text: "Create detailed day-of timeline", note: "Hour by hour schedule for all vendors & wedding party" },
                     { owner: "both", text: "Final suit fittings & pick up", note: "Try on with shoes and accessories" },
                     { owner: "both", text: "Confirm honeymoon plans", note: "Book flights, hotels, activities" }
-                ]
-            },
-            may: {
+            ]
+        },
+        may: {
                 title: "May 2026",
-                tasks: [
+            tasks: [
                     { owner: "both", text: "Send timeline to ALL vendors", note: "Make sure everyone has it 2-3 weeks before" },
                     { owner: "both", text: "Confirm all vendor details one final time", note: "Call each vendor to review timeline & logistics" },
                     { owner: "val", text: "Pre-batch cocktails (week before)", note: "Store properly, transport day-of" },
@@ -730,10 +730,17 @@
             }
         };
 
+        // Bump this when you change task data to invalidate local cache
+        const APP_VERSION = '1.0.1';
         let completedTasks = {};
         let isFirebaseReady = false;
         
         try {
+            const storedVersion = localStorage.getItem('weddingTasksVersion');
+            if (storedVersion !== APP_VERSION) {
+                localStorage.removeItem('weddingTasks');
+                localStorage.setItem('weddingTasksVersion', APP_VERSION);
+            }
             const saved = localStorage.getItem('weddingTasks');
             completedTasks = saved ? JSON.parse(saved) : {};
         } catch (e) {
@@ -823,29 +830,29 @@
         function renderView(view) {
             const container = document.getElementById(`${view}-view`);
             container.innerHTML = '';
-            
-            Object.keys(tasks).forEach(monthKey => {
-                const month = tasks[monthKey];
+        
+        Object.keys(tasks).forEach(monthKey => {
+            const month = tasks[monthKey];
                 
                 // Filter tasks for this view
-                const filteredTasks = month.tasks.filter(task => 
-                    view === 'both' ? task.owner === 'both' : task.owner === view || task.owner === 'both'
-                );
-                
-                if (filteredTasks.length === 0) return;
-                
+            const filteredTasks = month.tasks.filter(task => 
+                view === 'both' ? task.owner === 'both' : task.owner === view || task.owner === 'both'
+            );
+            
+            if (filteredTasks.length === 0) return;
+            
                 const monthSection = document.createElement('div');
                 monthSection.className = 'month-section';
                 monthSection.setAttribute('data-month', monthKey);
-                
+            
                 let html = `<div class="month-title">${month.title}</div>`;
-                
+            
                 filteredTasks.forEach(task => {
                     const originalIndex = month.tasks.indexOf(task);
                     const taskId = `${monthKey}-${originalIndex}`;
-                    const isCompleted = completedTasks[taskId] || false;
-                    
-                    html += `
+                const isCompleted = completedTasks[taskId] || false;
+                
+                html += `
                         <div class="task-item ${isCompleted ? 'completed' : ''}" data-task-id="${taskId}">
                             <div class="checkbox ${isCompleted ? 'checked' : ''}" data-task-id="${taskId}"></div>
                             <div>
@@ -853,21 +860,21 @@
                                     ${task.text}
                                     ${task.owner === 'both' ? '<span class="both-indicator">BOTH</span>' : ''}
                                 </div>
-                                <div class="task-note">${task.note}</div>
+                            <div class="task-note">${task.note}</div>
                             </div>
-                        </div>
-                    `;
-                });
-                
+                    </div>
+                `;
+            });
+            
                 monthSection.innerHTML = html;
                 container.appendChild(monthSection);
-            });
-        }
+        });
+    }
 
-        function toggleTask(taskId) {
-            completedTasks[taskId] = !completedTasks[taskId];
-            localStorage.setItem('weddingTasks', JSON.stringify(completedTasks));
-            
+    function toggleTask(taskId) {
+        completedTasks[taskId] = !completedTasks[taskId];
+        localStorage.setItem('weddingTasks', JSON.stringify(completedTasks));
+        
             document.querySelectorAll(`[data-task-id="${taskId}"]`).forEach(el => {
                 if (el.classList.contains('task-item')) {
                     el.classList.toggle('completed', completedTasks[taskId]);
@@ -1034,6 +1041,6 @@
             // Initialize Firebase sync
             initFirebaseSync();
         });
-    </script>
+</script>
 </body>
 </html>
